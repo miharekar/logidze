@@ -249,6 +249,7 @@ module Logidze
 
     def build_dup(log_entry, requested_ts = log_entry.time)
       object_at = dup
+      object_at.restore_attributes(object_at.attribute_names - ["log_data"])
       object_at.apply_diff(log_entry.version, log_data.changes_to(version: log_entry.version))
       object_at.id = id
       object_at.logidze_requested_ts = requested_ts
